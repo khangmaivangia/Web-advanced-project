@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy - Futbol-direct</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+
+        .text-brand-dark {
+            color: #1a202c;
+        }
+
+        .text-brand-accent {
+            color: #e53e3e;
+        }  
+
+        .border-brand-sec {
+            border-color: #e2e8f0;
+        }
+
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.3s ease;
+        }
+
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">   
+            <div class="container mx-auto px-4 py-6 flex items-center justify-between">
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+ 
+                <!-- Brand -->
+                <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+                    Futbol-direct<span class="text-brand-accent text-5xl"></span>
+                </a>
+                
+                <!-- Navigation -->
+                <nav id="mobile-menu" class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="news.html" class="text-gray-600 hover:text-gray-900 transition-colors">News</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+                </nav>
+            </div>
+        </header>   
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-10 flex-grow">
+            <h1 class="font-serif text-4xl font-bold text-brand-dark mb-
+6">Cookie Policy</h1>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                At Futbol-direct, we use cookies to enhance your browsing experience and provide personalized content.
+                This Cookie Policy explains what cookies are, how we use them, and your choices regarding their use.
+            </p>
+            <h2 class="font-serif text-2xl font-bold text-brand-dark mb-
+4">What are Cookies?</h2>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                Cookies are small text files that are stored on your device when you visit a website. They
+                help the website remember your preferences, login information, and other details to improve your experience.
+            </p>
+            <h2 class="font-serif text-2xl font-bold text-brand-dark mb-4">How We Use Cookies</h2>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                We use cookies for various purposes, including:
+
+                <ul class="list-disc list-inside mb-4">
+                    <li>To remember your preferences and settings.</li>
+                    <li>To analyze website traffic and user behavior.</li>
+                    <li>To provide personalized content and advertisements.</li>
+                </ul>
+            </p>
+            <h2 class="font-serif text-2xl font-bold text-brand-dark mb-4">Your Choices</h2>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                You can choose to accept or reject cookies through your browser settings. However, please note that rejecting cookies may affect your experience on our website and limit certain features.
+            </p>
+            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                For more information about cookies and how to manage them, you can visit <a href="https://www.allaboutcookies.org/" class="text-brand-accent hover:underline">All About Cookies</a>.
+            </p>
+        </main>  
+
+        <!-- Footer -->
+        <footer class="bg-white shadow-sm">
+            <div class="container mx-auto px-4 py-6 text-center text-gray-600">
+                &copy; 2024 Futbol-direct. All rights reserved.
+            </div>
+</html>
+
+        </footer>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>>
+</html>        
+
+
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | futboldirect</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'brand-bg': '#FFFFFF',      // White
+                    'brand-dark': '#000000',    // Black
+                    'brand-accent': '#F5F5F5',  // Light Gray
+                    'brand-sec': '#E5E5E5',     // Gray Border
+                    'brand-text': '#333333',    // Dark Gray
+                },
+                fontFamily: {
+                    sans: ['Outfit', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif'],
+                },
+            }
+        }
+    }
+</script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="antialiased font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec">
+            <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+                <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+                    Futbol-direct<span class="text-brand-accent text-5xl">⚽</span>
+                </a>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors"
+                    aria-label="Toggle dark mode" aria-pressed="false" type="button">
+                    Light
+                </button>
+            </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-[100px] pb-20 min-h-screen flex items-center justify-center">
+        <section class="container mx-auto px-4 md:px-8">
+            <div class="max-w-md mx-auto">
+                <div class="bg-white border-2 border-brand-dark p-8">
+                    <h1 class="font-serif text-3xl font-bold text-brand-dark mb-2 text-center">Create Account</h1>
+                    <p class="text-gray-600 text-center text-sm mb-8">Join Futbol-direct to follow your favorite teams</p>
+
+                    <div id="auth-message" class="hidden text-sm mb-4"></div>
+
+                    <form id="register-form" class="space-y-6">
+                        <!-- Full Name -->
+                        <div>
+                            <label for="register-fullname" class="block text-xs font-bold uppercase tracking-widest text-brand-dark mb-2">
+                                Full Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="register-fullname"
+                                name="fullname"
+                                placeholder="John Doe"
+                                class="w-full px-4 py-3 border-2 border-brand-dark focus:outline-none focus:bg-brand-accent transition-colors"
+                                required
+                            >
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="register-email" class="block text-xs font-bold uppercase tracking-widest text-brand-dark mb-2">
+                                Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                id="register-email"
+                                name="email"
+                                placeholder="john@example.com"
+                                class="w-full px-4 py-3 border-2 border-brand-dark focus:outline-none focus:bg-brand-accent transition-colors"
+                                required
+                            >
+                        </div>
+
+                        <!-- Username -->
+                        <div>
+                            <label for="register-username" class="block text-xs font-bold uppercase tracking-widest text-brand-dark mb-2">
+                                Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="register-username"
+                                name="username"
+                                placeholder="johndoe123"
+                                class="w-full px-4 py-3 border-2 border-brand-dark focus:outline-none focus:bg-brand-accent transition-colors"
+                                required
+                            >
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="register-password" class="block text-xs font-bold uppercase tracking-widest text-brand-dark mb-2">
+                                Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="register-password"
+                                name="password"
+                                placeholder="••••••••"
+                                class="w-full px-4 py-3 border-2 border-brand-dark focus:outline-none focus:bg-brand-accent transition-colors"
+                                required
+                            >
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="register-confirm-password" class="block text-xs font-bold uppercase tracking-widest text-brand-dark mb-2">
+                                Confirm Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="register-confirm-password"
+                                name="confirmPassword"
+                                placeholder="••••••••"
+                                class="w-full px-4 py-3 border-2 border-brand-dark focus:outline-none focus:bg-brand-accent transition-colors"
+                                required
+                            >
+                        </div>
+
+                        <!-- Terms Checkbox -->
+                        <div class="flex items-start gap-3">
+                            <input 
+                                type="checkbox" 
+                                id="register-terms"
+                                name="terms"
+                                class="mt-1 w-4 h-4 border-2 border-brand-dark accent-brand-dark"
+                                required
+                            >
+                            <label for="register-terms" class="text-xs text-gray-600">
+                                I agree to the <a href="#" class="underline hover:text-brand-dark">Terms of Service</a> and <a href="#" class="underline hover:text-brand-dark">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit"
+                            class="w-full py-3 bg-brand-dark text-white font-bold uppercase tracking-widest text-xs hover:bg-gray-900 transition-colors"
+                        >
+                            Create Account
+                        </button>
+                    </form>
+
+                    <!-- Login Link -->
+                    <div class="mt-8 text-center">
+                        <p class="text-sm text-gray-600">
+                            Already have an account? 
+                            <a href="login.html" class="font-bold text-brand-dark hover:underline">Sign In</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Back to Home -->
+                <div class="text-center mt-8">
+                    <a href="landingpage.html" class="text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-brand-dark border-b-2 border-brand-dark pb-1">
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-bg border-t border-brand-sec pt-12 pb-6 text-brand-dark mt-20">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="text-center text-sm text-gray-600">
+                <p>&copy; 2026 Futbol-direct. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dependencies for script.js -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

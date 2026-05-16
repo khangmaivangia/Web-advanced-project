@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article | futboldirect</title>
+  <link rel="shortcut icon"
+    href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico"
+    type="image/x-icon" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-bg': '#FFFFFF',
+            'brand-dark': '#000000',
+            'brand-accent': '#D4AF37',
+            'brand-sec': '#E5E5E5',
+            'brand-text': '#333333',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="antialiased font-sans">
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec transition-all duration-300 shadow-sm"
+    id="main-header">
+    <div class="bg-brand-dark text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center relative z-20">
+      <div class="flex items-center gap-6">
+        <span id="current-date" class="uppercase tracking-widest font-bold"></span>
+      </div>
+      <div class="flex items-center gap-4 text-lg">
+        <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-facebook-logo"></i></a>
+        <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-x-logo"></i></a>
+      </div>
+    </div>
+
+    <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+      <button id="hamburger"
+        class="lg:hidden text-brand-dark hover:text-brand-accent"
+        aria-label="Open mobile menu" type="button">
+        <i class="ph ph-list text-2xl"></i>
+      </button>
+
+      <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+        Futbol-direct
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-10 text-brand-dark text-xs font-bold uppercase tracking-[0.15em] relative">
+        <a href="livescores.html" class="nav-link hover:text-brand-accent transition-colors">Live Scores</a>
+        <a href="news.html" class="nav-link hover:text-brand-accent transition-colors">News</a>
+        <a href="transfer.html" class="nav-link hover:text-brand-accent transition-colors">Transfer</a>
+      </nav>
+
+      <div class="flex items-center gap-5 text-brand-dark">
+        <button id="theme-toggle"
+          class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors"
+          aria-label="Toggle dark mode" aria-pressed="false" type="button">
+          Light
+        </button>
+
+        <a href="login.html"
+          class="hidden md:inline-block px-5 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+          Login
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu"
+    class="fixed inset-0 bg-brand-bg z-[100] transform -translate-x-full transition-transform duration-300 px-6 flex flex-col justify-center overflow-y-auto">
+    <button id="close-mobile"
+      class="absolute top-6 right-6 p-2 text-brand-dark hover:text-brand-accent transition-colors z-[101]"
+      aria-label="Close mobile menu" type="button">
+      <i class="ph ph-x text-3xl"></i>
+    </button>
+
+    <div class="mb-8 text-center pt-10">
+      <h2 class="font-serif text-3xl font-bold text-brand-dark dark:text-white">Futbol-direct</h2>
+    </div>
+
+    <nav class="flex flex-col gap-4 text-2xl font-serif text-brand-dark text-center items-center w-full">
+      <a href="livescores.html" class="hover:text-brand-accent transition-all">Live Scores</a>
+      <a href="news.html" class="hover:text-brand-accent transition-all">News</a>
+      <a href="transfer.html" class="hover:text-brand-accent transition-all">Transfer</a>
+    </nav>
+
+    <div class="mt-8 text-center pb-8 space-y-3">
+      <a href="login.html"
+        class="inline-block px-8 py-3 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+        Login
+      </a>
+      <a href="register.html"
+        class="inline-block px-8 py-3 border border-brand-dark text-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+        Register
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="pt-[140px] pb-20">
+    <section class="container mx-auto px-4 md:px-8 mb-10">
+      <div class="mb-6">
+        <a href="news.html"
+          class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest border-b-2 border-brand-dark pb-1 hover:text-gray-600 transition-colors">
+          <i class="ph ph-arrow-left"></i>
+          Back to News
+        </a>
+      </div>
+
+      <article class="bg-white border-2 border-brand-sec p-6 md:p-10">
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <span id="article-category"
+            class="inline-flex items-center gap-2 px-3 py-2 border border-brand-sec bg-brand-bg text-xs font-bold uppercase tracking-widest">
+            <span class="w-2 h-2 bg-brand-accent rounded-full"></span>
+            <span id="article-category-text">News</span>
+          </span>
+
+          <span id="article-date"
+            class="text-xs font-bold uppercase tracking-widest text-gray-600">
+            —
+          </span>
+        </div>
+
+        <h1 id="article-title" class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">
+          Article title
+        </h1>
+
+        <p id="article-subtitle" class="text-gray-600 text-lg leading-relaxed mb-8">
+          Article summary (placeholder).
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <!-- Left -->
+          <div class="lg:col-span-8">
+            <h2 class="font-serif text-2xl font-bold text-brand-dark mb-3">Match Preview / Details</h2>
+            <p id="article-body" class="text-gray-600 leading-relaxed">
+              This is where the detailed article content will appear. Add your real API text later.
+            </p>
+
+            <div class="mt-8 border-t border-brand-sec pt-6">
+              <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Highlights (Placeholder)</h3>
+              <ul class="list-disc pl-5 text-gray-600 space-y-2" id="article-highlights">
+                <li>Key moment #1</li>
+                <li>Key moment #2</li>
+                <li>Key moment #3</li>
+              </ul>
+            </div>
+
+            <div class="mt-8 border-t border-brand-sec pt-6">
+              <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Lineups (Placeholder)</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="border border-brand-sec bg-brand-bg p-4">
+                  <div class="font-bold uppercase tracking-widest text-xs text-gray-600 mb-2">Home</div>
+                  <div id="article-home-lineup" class="font-mono text-gray-600">—</div>
+                </div>
+                <div class="border border-brand-sec bg-brand-bg p-4">
+                  <div class="font-bold uppercase tracking-widest text-xs text-gray-600 mb-2">Away</div>
+                  <div id="article-away-lineup" class="font-mono text-gray-600">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar -->
+          <aside class="lg:col-span-4 space-y-4">
+            <div class="border-2 border-brand-sec p-5 bg-brand-bg">
+              <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Stats (Placeholder)</h3>
+              <div class="text-sm text-gray-600 space-y-2">
+                <div class="flex justify-between gap-4"><span>Shots</span><span id="stat-shots">—</span></div>
+                <div class="flex justify-between gap-4"><span>Shots on target</span><span id="stat-sot">—</span></div>
+                <div class="flex justify-between gap-4"><span>Possession</span><span id="stat-pos">—</span></div>
+              </div>
+            </div>
+
+            <div class="border-2 border-brand-sec p-5 bg-brand-bg">
+              <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">Related Articles (Placeholder)</h3>
+              <div class="space-y-2">
+                <a href="news.html" class="block text-sm font-bold uppercase tracking-widest text-brand-accent hover:text-yellow-500 transition-colors">More news</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Cookie Consent Popup (must exist so script.js shows it) -->
+  <div id="cookie-banner"
+    class="fixed bottom-0 right-0 md:bottom-8 md:right-8 z-[100] w-full md:w-[400px] bg-brand-dark text-white p-6 md:rounded-sm shadow-2xl border border-brand-sec/10">
+    <div class="flex justify-between items-start mb-4">
+      <h4 class="font-serif text-xl text-brand-accent">Privacy & Cookies</h4>
+      <button id="close-cookie" class="text-white/50 hover:text-white transition-colors" type="button" aria-label="Close cookie banner">
+        <i class="ph ph-x text-lg"></i>
+      </button>
+    </div>
+    <p class="text-sm text-gray-300 leading-relaxed mb-6">
+      We use cookies to enhance your experience, analyze our traffic, and serve personalized content. By using our
+      site, you agree to our <a href="cookies.html" class="text-white underline decoration-brand-accent">Cookie
+        Policy</a>.
+    </p>
+    <div class="flex flex-col gap-3">
+      <div class="flex gap-3">
+        <button id="accept-cookies" type="button"
+          class="flex-1 bg-brand-accent text-brand-dark py-3 font-bold uppercase tracking-widest text-xs hover:bg-yellow-500 transition-colors">
+          Accept All
+        </button>
+        <button id="reject-cookies" type="button"
+          class="flex-1 border border-white/20 text-white py-3 font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brand-dark transition-colors">
+          Reject
+        </button>
+      </div>
+      <button id="manage-cookies" type="button"
+        class="text-center text-xs text-gray-300 hover:text-white transition-colors underline decoration-dotted">
+        Manage Preferences
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-bg border-t border-brand-sec pt-20 pb-10 text-brand-dark">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="border-t border-brand-sec pt-8 text-center text-sm text-gray-600">
+        <p>&copy; 2026 Futbol-direct. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Ensure cookie banner starts hidden until script.js adds `.visible`
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.classList.remove('visible');
+    });
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = value ?? '—';
+    }
+
+    function setHtmlText(id, value) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = value ?? '';
+    }
+
+    (function initArticle() {
+      const params = new URLSearchParams(window.location.search);
+      const articleId = params.get('id'); // optional
+
+      const titleEl = document.getElementById('article-title');
+      const categoryText = document.getElementById('article-category-text');
+
+      if (titleEl) titleEl.textContent = 'Article title' + (articleId ? ` (ID: ${articleId})` : '');
+      if (categoryText) categoryText.textContent = 'Match Report';
+
+      setText('article-date', params.get('date') || 'May 12, 2026');
+      const subtitle = params.get('subtitle') || 'Article summary (placeholder).';
+      setHtmlText('article-subtitle', subtitle);
+
+      const body = params.get('body') || 'This is where the detailed article content will appear. Add your real API text later.';
+      const bodyEl = document.getElementById('article-body');
+      if (bodyEl) bodyEl.textContent = body;
+
+      const highlights = document.getElementById('article-highlights');
+      if (highlights && params.get('highlights')) {
+        try {
+          const arr = JSON.parse(params.get('highlights'));
+          if (Array.isArray(arr) && arr.length) {
+            highlights.innerHTML = arr
+              .map((x) => `<li>${String(x).replaceAll('<', '<').replaceAll('>', '>')}</li>`)
+              .join('');
+          }
+        } catch { /* ignore */ }
+      } else if (highlights) {
+        // keep default placeholder lis
+      }
+
+      setText('article-home-lineup', params.get('homeLineup') || '—');
+      setText('article-away-lineup', params.get('awayLineup') || '—');
+      setText('stat-shots', params.get('shots') || '—');
+      setText('stat-sot', params.get('shotsOnTarget') || '—');
+      setText('stat-pos', params.get('possession') || '—');
+    })();
+  </script>
+</body>
+
+</html>

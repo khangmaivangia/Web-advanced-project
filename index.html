@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to watch football news?</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+    tailwind.config = {
+        darkMode: 'dark-mode',
+        theme: {
+            extend: {
+                colors: {
+                    'brand-bg': '#FFFFFF', 
+                    'brand-dark': '#000000',    
+                    'brand-accent': '#D4AF37',  
+                    'brand-sec': '#E5E5E5',     
+                    'brand-text': '#333333',   
+                },
+                fontFamily: {
+                    sans: ['Outfit', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif'],
+                },
+                animation: {
+                    'ticker': 'ticker 40s linear infinite',
+                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                },
+                keyframes: {
+                    ticker: {
+                        '0%': { transform: 'translateX(0)' },
+                        '100%': { transform: 'translateX(-50%)' },
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="antialiased font-sans">
+
+    <!-- SHUTTER LOADER -->
+    <div id="loader-overlay">
+        <div id="shutter-top" class="shutter"></div>
+        <div id="shutter-bottom" class="shutter"></div>
+        <div id="loader-content" class="flex flex-col items-center">
+            <span id="loader-count" class="font-mono text-6xl md:text-9xl font-bold opacity-100">0</span>
+            <span id="loader-brand"
+                class="font-serif text-4xl md:text-6xl tracking-widest mt-4 opacity-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-150 transition-all duration-700">A CLASSIC</span>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay"
+        class="fixed inset-0 bg-brand-dark/95 z-[60] hidden flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-300">
+        <button id="close-search" class="absolute top-8 right-8 text-black hover:text-brand-accent transition-colors">
+            <i class="ph ph-x text-4xl"></i>
+        </button>
+        <div class="w-full max-w-3xl text-center">
+            <h2 class="text-brand-accent font-serif text-3xl mb-8 italic">Explore the Journal</h2>
+            <div class="relative border-b-2 border-white/20 focus-within:border-brand-accent transition-colors">
+                <input type="text" placeholder="Type keywords..."
+                    class="w-full bg-transparent py-4 text-3xl md:text-5xl text-black placeholder-gray-600 focus:outline-none font-serif text-center">
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Stack -->
+    <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec transition-all duration-300 shadow-sm"
+        id="main-header">
+
+        <!-- 1. Topbar -->
+        <div class="bg-brand-dark text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center relative z-20">
+            <div class="flex items-center gap-6">
+                <span id="current-date" class="uppercase tracking-widest font-bold text-brand-accent"></span>
+                <span class="hidden md:inline text-white/60"></span>
+            </div>
+            <div class="flex items-center gap-4 text-lg">
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-facebook-logo"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-x-logo"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-linkedin-logo"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-instagram-logo"></i></a>
+            </div>
+        </div>
+
+        <!-- 2. Main Navigation -->
+        <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+            <!-- Hamburger (Mobile) -->
+            <button class="lg:hidden text-brand-dark hover:text-brand-accent" id="hamburger">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+
+            <!-- Brand -->
+            <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+                    Futbol-direct<span class="text-brand-accent text-5xl"></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav
+                class="hidden lg:flex items-center gap-10 text-brand-dark text-xs font-bold uppercase tracking-[0.15em] relative">
+                <a href="livescores.html" class="nav-link hover:text-brand-accent transition-colors">Live Scores</a>
+
+                <!-- Dropdown -->
+                <div class="group relative py-4 cursor-pointer">
+                    <span class="nav-link hover:text-brand-accent transition-colors flex items-center gap-1">
+                        Leagues <i class="ph ph-caret-down"></i>
+                    </span>
+                    <div
+                        class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 w-48">
+                        <div class="bg-white border border-brand-sec shadow-xl p-2 flex flex-col">
+                            <a href="livescores.html"
+                                class="px-4 py-3 hover:bg-brand-bg hover:text-brand-dark transition-colors">Premier League</a>
+                            <a href="livescores.html"
+                                class="px-4 py-3 hover:bg-brand-bg hover:text-brand-dark transition-colors">La Liga</a>
+                            <a href="livescores.html"
+                                class="px-4 py-3 hover:bg-brand-bg hover:text-brand-dark transition-colors">Serie A</a>
+                            <a href="livescores.html"
+                                class="px-4 py-3 hover:bg-brand-bg hover:text-brand-dark transition-colors">Bundesliga</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="news.html" class="nav-link hover:text-brand-accent transition-colors">News</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-5 text-brand-dark">
+                <button id="search-trigger" class="hover:text-brand-accent transition-colors">
+                    <i class="ph ph-magnifying-glass text-xl"></i>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-black transition-colors"
+                    aria-label="Toggle dark mode" aria-pressed="false" type="button">
+                    Light
+                </button>
+
+                <a href="login.html"
+                    class="hidden md:inline-block px-5 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-black transition-colors">
+                    Login
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. Trending Ticker -->
+        <div class="border-t border-brand-sec bg-white py-2 overflow-hidden flex items-center relative z-10">
+            <div
+                class="px-4 md:px-8 bg-white z-10 border-r border-brand-sec shrink-0 shadow-[5px_0_10px_-5px_rgba(0,0,0,0.1)]">
+                <span class="text-brand-dark font-bold uppercase text-[10px] tracking-widest flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                    Breaking
+                </span>
+            </div>
+            <div class="relative w-full overflow-hidden">
+                <div class="flex whitespace-nowrap animate-ticker gap-12 text-xs font-medium text-gray-500">
+                    <span>Man City vs Crystal Palace: Final Score 3-0</span>
+                    <span>•</span>
+                    <span>PSG Advances to Champions League Final</span>
+                    <span>•</span>
+                    <span>Transfer News: PSG attention for West Ham Midfielder</span>
+                    <span>•</span>
+                    <span>Premier League: Arsenal Wins 1-0 against West Ham</span>
+                    <span>•</span>
+                    <span>Man City vs Crystal Palace: Final Score: 3-0</span>
+                    <span>•</span>
+                    <span>PSG Advances to Champions League Final</span>
+                    <span>•</span>
+                    <span>Transfer News: PSG attention for West Ham Midfielder</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-brand-bg z-[100] transform -translate-x-full transition-transform duration-300 px-6 flex flex-col justify-center overflow-y-auto">
+        <button id="close-mobile"
+            class="absolute top-6 right-6 p-2 text-brand-dark hover:text-brand-accent transition-colors z-[101]">
+            <i class="ph ph-x text-3xl"></i>
+        </button>
+
+        <div class="mb-8 text-center pt-10">
+            <h2 class="font-serif text-3xl font-bold text-brand-dark dark:text-white">A CLASSIC</h2>
+        </div>
+
+        <nav class="flex flex-col gap-4 text-2xl font-serif text-brand-dark text-center items-center w-full">
+            <a href="livescores.html" class="hover:text-brand-accent transition-all">Live Scores</a>
+
+            <!-- Mobile Dropdown -->
+            <div class="w-full">
+                <button id="mobile-dropdown-btn"
+                    class="flex items-center justify-center gap-2 hover:text-brand-accent transition-all w-full py-2">
+                    Leagues <i class="ph ph-caret-down text-lg transition-transform duration-300"></i>
+                </button>
+                <div id="mobile-dropdown-content"
+                    class="hidden flex-col bg-brand-sec/30 rounded-sm mt-2 overflow-hidden w-full max-w-sm mx-auto">
+                    <a href="livescores.html"
+                        class="block py-3 px-4 hover:bg-brand-sec hover:text-brand-dark transition-all text-lg border-b border-brand-sec/50 last:border-0">Premier League</a>
+                    <a href="livescores.html"
+                        class="block py-3 px-4 hover:bg-brand-sec hover:text-brand-dark transition-all text-lg border-b border-brand-sec/50 last:border-0">La Liga</a>
+                    <a href="livescores.html"
+                        class="block py-3 px-4 hover:bg-brand-sec hover:text-brand-dark transition-all text-lg border-b border-brand-sec/50 last:border-0">Serie A</a>
+                    <a href="livescores.html"
+                        class="block py-3 px-4 hover:bg-brand-sec hover:text-brand-dark transition-all text-lg border-b border-brand-sec/50 last:border-0">Bundesliga</a>
+                </div>
+            </div>
+
+            <a href="news.html" class="hover:text-brand-accent transition-all">News</a>
+        </nav>
+
+        <div class="mt-8 text-center pb-8 space-y-3">
+            <a href="login.html"
+                class="inline-block px-8 py-3 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+                Login
+            </a>
+            <a href="register.html"
+                class="inline-block px-8 py-3 border border-brand-dark text-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-black transition-colors">
+                Register
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-[220px]">
+
+        <!-- HERO SECTION -->
+        <section class="container mx-auto px-4 md:px-8 mb-20">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-12 items-center bg-white border border-brand-sec p-6 md:p-10 shadow-sm">
+                <div
+                    class="img-zoom-container h-[400px] lg:h-[550px] w-full overflow-hidden relative group cursor-pointer order-2 lg:order-1">
+                    <img src="https://s3-api.fpt.vn/fptvn-storage/2026-05-14/1778734897_highlight-man-city-vs-crystal-palace-1.jpg"
+                        class="w-full h-full object-cover img-zoom" alt="Hero">
+                </div>
+                <div class="flex flex-col justify-center order-1 lg:order-2 mb-8 lg:mb-0">
+                    <div
+                        class="flex items-center gap-3 text-brand-accent text-xs font-bold uppercase tracking-widest mb-4">
+                        <span>Premier League</span>
+                        <span>•</span>
+                        <span>May 12, 2026</span>
+                    </div>
+                    <h1
+                        class="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] mb-6 text-brand-dark hover:text-gray-600 transition-colors cursor-pointer">
+                        <a href="read.html?id=101&subtitle=Manchester%20City%20win%20against%20Liverpool%20(placeholder)">Manchester City win against Crystal Palace <br><span class="italic text-brand-accent">BRUTALLLLL!!!</span></a>
+                    </h1>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        City defeats Crystal Palace in thrilling final match 3-0. Sememyo, Marmoush, and Savio scored the goals for City, racing the first place with Arsenal by only 2 POINTS!!! Will they make it?
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/james-caldwell.jpg"
+                            class="w-12 h-12 rounded-full object-cover border border-brand-sec" alt="Author">
+                        <div>
+                            <p class="text-sm font-bold text-brand-dark uppercase tracking-wide">James Smith</p>
+                            <p class="text-xs text-gray-500">Sports Correspondent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN CONTENT AREA (List + Sticky Sidebar) -->
+        <section class="container mx-auto px-4 md:px-8 mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative">
+
+                <!-- Left: Article Feed -->
+                <div class="lg:col-span-8 space-y-12">
+                    <div class="flex items-end justify-between border-b border-brand-sec pb-4 mb-8">
+                        <h2 class="font-serif text-2xl font-bold text-brand-dark">Today's Matches</h2>
+                        <a href="blog.html"
+                            class="text-xs font-bold uppercase tracking-widest text-brand-dark hover:text-brand-accent">View
+                            All</a>
+                    </div>
+
+                    <!-- Article 1 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://i2-prod.football.london/article33922507.ece/ALTERNATES/s1200f/1_Leandro-Trossard-and-Arsenal.jpg"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 1">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Premier League</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                Arsenal 1 - 0 West Ham
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                A crazy match tonight. Arsenal secures a narrow victory after the 83rd minute winner from Trossard
+                            </p>
+                            <a href="read.html?id=102&subtitle=Arsenal%201-0%20West%20Ham%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+
+                    <!-- Article 2 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://i.guim.co.uk/img/media/b7fa1c9ccaf87ac076394425defb06b1e539df6f/430_0_2956_2365/master/2956.jpg?width=465&dpr=1&s=none&crop=none"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 2">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">La Liga</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                Barcelona 2 - 0 Real Madrid
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                Barcelona has reign the championship with a thriller from Rashford and a exceptional tiki taka from Dani Olmo and Feran Torres. Real Madrid's title defense suffers a major blow with this defeat at the Camp Nou.
+                            </p>
+                            <a href="read.html?id=103&subtitle=Barcelona%202-0%20Real%20Madrid%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 3 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://cf-images.assettype.com/outlookindia/2026-05-14/or409arb/CoppaItaliaInterMilanvsLazio820260514.jpg?w=801&auto=format%2Ccompress&fit=max&format=webp&dpr=1.0"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 3">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Serie A</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                Inter Milan 2 - 0 Lazio
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                Inter Milan dominates Lazio with a commanding 2-0 victory, securing their road to the serie A <title class=""></title>
+                            </p>
+                            <a href="read.html?id=104&subtitle=Inter%20Milan%202-0%20Lazio%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 4 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://media.video-cdn.espn.com/motion/2026/0509/81b231ab116849b5b1031fec78e7802e881/81b231ab116849b5b1031fec78e7802e881.jpg"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 4">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Bundesliga</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                Bayern Munich 1 - 0 Wolfsburg
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                Bayern's attacking don't proven effective until Olise scores the only goal.
+                            </p>
+                            <a href="read.html?id=105&subtitle=Bayern%204-2%20Wolfsburg%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 5 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://editorial.uefa.com/resources/02a5-20903e1407d3-ce728aec6a50-1000/bayern_munich_vs_psg_-_uefa_champions_league.jpeg"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 5">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Champions League</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                PSG 1 - 0 Bayern Munich
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                PSG vs Bayern Munich kicks off with high intensity as both teams battle for control. PSG's relentless pressure pays off in the 68th minute when Dembele scores a stunning goal, giving them a crucial lead in this Champions League clash.
+                            </p>
+                            <a href="read.html?id=106&subtitle=PSG%203-1%20Bayern%20Munich%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 6 -->
+                    <article class="flex flex-col md:flex-row gap-8 group border-b border-brand-sec pb-8">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://liveblog.digitalimages.sky/lc-images-sky/lcimg-0c871dd3-446e-4265-b516-5e237a917672.jpeg"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 6">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Transfer News</span>
+                                <span>•</span>
+                                <span>Breaking</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                PSG possessed an interest in signing Fernandes
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                Paris Saint-Germain are among the clubs interested in West Ham midfielder Mateus Fernandes.
+                            </p>
+                            <a href="read.html?id=107&subtitle=PSG%20Interest%20in%20Fernandes%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Transfer Details</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 7 -->
+                    <article class="flex flex-col md:flex-row gap-8 group">
+                        <div class="w-full md:w-5/12 img-zoom-container overflow-hidden h-60 shrink-0">
+                            <img src="https://i-thethao.vnecdn.net/2026/05/09/aston-villa-png-1778260327-7690-1778260550.png"
+                                class="w-full h-full object-cover img-zoom" alt="Blog 7">
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div
+                                class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                                <span class="text-brand-accent">Europa League</span>
+                                <span>•</span>
+                                <span>Final Score</span>
+                            </div>
+                            <h3
+                                class="font-serif text-2xl font-bold mb-3 group-hover:text-brand-accent transition-colors cursor-pointer">
+                                Aston Villa 4 - 0 Nottingham Forest
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                                A dominant performance from Aston Villa as they secure a resounding 4-0 victory over Nottingham Forest in the Europa League. Villa's attacking prowess was on full display, with goals from Watkins, Buendia, and a brace from Ings sealing their place in the next round. Nottingham Forest struggled to contain Villa's relentless offense, resulting in a disappointing exit from the competition.
+                            </p>
+                            <a href="read.html?id=111&subtitle=Aston%20Villa%204-0%20Nottingham%20Forest%20(placeholder)"
+                                class="text-xs font-bold uppercase tracking-widest border-b border-brand-dark pb-1 self-start hover:text-brand-accent hover:border-brand-accent transition-all">Match Report</a>
+                        </div>
+                    </article>
+
+                    <div class="pt-8 text-center">
+                        <a href="blog.html"
+                            class="px-8 py-3 border border-brand-sec hover:border-brand-dark hover:bg-brand-dark hover:text-black transition-all text-xs font-bold uppercase tracking-widest">Load
+                            More Stories</a>
+                    </div>
+                </div>
+
+                <!-- Right: Sticky Sidebar -->
+                <aside class="lg:col-span-4 relative">
+                    <div class="sticky top-32 space-y-12">
+                        <!-- About -->
+                        <div class="bg-white p-6 border border-brand-sec">
+                            <h4 class="font-serif text-xl font-bold mb-4">About Futbol-direct</h4>
+                            <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+                                Your ultimate destination for live football scores, standings, transfers, and exclusive match analysis from all major leagues worldwide.
+                            </p>
+                            <a href="about.html"
+                                class="text-xs font-bold uppercase tracking-widest text-brand-accent">Learn
+                                More</a>
+                        </div>
+
+                        <!-- Categories -->
+                        <div>
+                            <h4 class="font-bold text-xs uppercase tracking-widest border-b border-brand-sec pb-2 mb-4">
+                                Leagues</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex justify-between cursor-pointer group"><a href="category.html"
+                                        class="group-hover:text-brand-accent">Premier League</a> <span
+                                        class="text-gray-400">380</span></li>
+                                <li class="flex justify-between cursor-pointer group"><a href="category.html"
+                                        class="group-hover:text-brand-accent">La Liga</a> <span
+                                        class="text-gray-400">380</span></li>
+                                <li class="flex justify-between cursor-pointer group"><a href="category.html"
+                                        class="group-hover:text-brand-accent">Serie A</a> <span
+                                        class="text-gray-400">380</span></li>
+                                <li class="flex justify-between cursor-pointer group"><a href="category.html"
+                                        class="group-hover:text-brand-accent">Bundesliga</a> <span
+                                        class="text-gray-400">306</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Sidebar Section: Trending Topics -->
+                        <div>
+                            <h4 class="font-bold text-xs uppercase tracking-widest border-b border-brand-sec pb-2 mb-4">
+                                Trending Now</h4>
+                            <div class="space-y-4">
+                                <div class="group cursor-pointer">
+                                    <span class="text-[10px] text-brand-accent font-bold">01</span>
+                                    <h5 class="font-serif font-bold group-hover:text-brand-accent transition-colors">
+                                        <a href="read.html?id=108&subtitle=Haaland%27s%20Record-Breaking%20Season%20(placeholder)">Haaland's Record-Breaking Season</a>
+                                    </h5>
+                                </div>
+                                <div class="group cursor-pointer">
+                                    <span class="text-[10px] text-brand-accent font-bold">02</span>
+                                    <h5 class="font-serif font-bold group-hover:text-brand-accent transition-colors">The
+                                        <a href="read.html?id=109&subtitle=Champions%20League%20Favorites%20(placeholder)">Champions League Favorites</a>
+                                    </h5>
+                                </div>
+                                <div class="group cursor-pointer">
+                                    <span class="text-[10px] text-brand-accent font-bold">03</span>
+                                    <h5 class="font-serif font-bold group-hover:text-brand-accent transition-colors">
+                                        <a href="read.html?id=110&subtitle=Summer%20Transfer%20Market%202026%20(placeholder)">Summer Transfer Market 2026</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADVERTISEMENT PLACEHOLDER (Sidebar) -->
+                        <div
+                            class="w-full h-64 bg-gray-100 flex items-center justify-center border border-dashed border-gray-300">
+                            <span class="text-xs font-bold uppercase text-gray-400 tracking-widest">Advertisement</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- SECTION: CURATED COLLECTIONS (Slider) -->
+        <section class="container mx-auto px-4 md:px-8 mb-24">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <span
+                        class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-2">Follow</span>
+                    <h2 class="font-serif text-3xl text-brand-dark">Top Leagues</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button id="slide-prev"
+                        class="w-10 h-10 border border-brand-sec flex items-center justify-center hover:bg-brand-dark hover:text-black transition-colors"><i
+                            class="ph ph-arrow-left"></i></button>
+                    <button id="slide-next"
+                        class="w-10 h-10 border border-brand-sec flex items-center justify-center hover:bg-brand-dark hover:text-black transition-colors"><i
+                            class="ph ph-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div id="category-slider" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth">
+                <!-- Card 1 -->
+                <div class="min-w-[280px] md:min-w-[350px] group cursor-pointer">
+                    <a href="category.html" class="h-[400px] overflow-hidden mb-4 relative">
+                        <img src="https://static.vecteezy.com/system/resources/previews/015/863/623/non_2x/england-premier-league-logo-on-transparent-background-free-vector.jpg"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            alt="Tech">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <span class="absolute bottom-6 left-6 text-black font-serif text-2xl">Premier League</span>
+                    </a>
+                </div>
+                <!-- Card 2 -->
+                <div class="min-w-[280px] md:min-w-[350px] group cursor-pointer">
+                    <a href="category.html" class="h-[400px] overflow-hidden mb-4 relative">
+                        <img src="https://crystalpng.com/wp-content/uploads/2023/06/La-liga-new-logo-red.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            alt="Home">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <span class="absolute bottom-6 left-6 text-black font-serif text-2xl">La Liga</span>
+                    </a>
+                </div>
+                <!-- Card 3 -->
+                <div class="min-w-[280px] md:min-w-[350px] group cursor-pointer">
+                    <a href="category.html" class="h-[400px] overflow-hidden mb-4 relative">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/1280px-Serie_A_logo_2022.svg.png"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            alt="Travel">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <span class="absolute bottom-6 left-6 text-black font-serif text-2xl">Serie A</span>
+                    </a>
+                </div>
+                <!-- Card 4 -->
+                <div class="min-w-[280px] md:min-w-[350px] group cursor-pointer">
+                    <a href="category.html" class="h-[400px] overflow-hidden mb-4 relative">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/010/994/340/small/bundesliga-logo-symbol-with-name-design-germany-football-european-countries-football-teams-illustration-with-white-background-free-vector.jpg"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            alt="Coffee">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <span class="absolute bottom-6 left-6 text-black font-serif text-2xl">Bundesliga</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TOPICS WE COVER -->
+        <section class="container mx-auto px-4 md:px-8 mb-24">
+            <div class="text-center mb-12">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-widest block mb-2">Coverage</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-brand-dark">What We Cover</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="livescores.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-soccer-ball text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Live Scores</h3>
+                </a>
+
+                <a href="standings.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-trophy text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Standings</h3>
+                </a>
+
+                <a href="transfer.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-arrows-left-right text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Transfers</h3>
+                </a>
+
+                <a href="statistics.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-chart-line-up text-3xl text-brand-dark dark:text-white group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Statistics</h3>
+                </a>
+
+                <a href="playerprofiles.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-users text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Player Profiles</h3>
+                </a>
+
+                <a href="teaminfo.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-info text-3xl text-brand-dark dark:text-white group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Team Info</h3>
+                </a>
+
+                <a href="analysis.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-microphone text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">Podcast (in progress)</h3>
+                </a>
+
+                <a href="category.html"
+                    class="bg-white border border-brand-sec p-6 hover:border-brand-accent transition-colors group cursor-pointer text-center coverage-tile">
+                    <i class="ph ph-newspaper text-3xl text-brand-dark group-hover:text-brand-accent mb-3"></i>
+                    <h3 class="font-serif text-lg dark:text-white coverage-tile-label">News</h3>
+                </a>
+            </div>
+        </section>
+
+        <!-- TOP CONTRIBUTORS -->
+        <section class="container mx-auto px-4 md:px-8 mb-24">
+            <div class="text-center mb-12">
+                <h2 class="font-serif text-3xl md:text-4xl text-brand-dark mb-3">Expert Analysts</h2>
+                <div class="h-1 w-12 bg-brand-accent mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contributor 1 -->
+                <div class="flex flex-col items-center text-center group cursor-pointer">
+                    <div
+                        class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-accent transition-all p-1">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/eleanor-sterling.jpg" class="w-full h-full object-cover rounded-full"
+                            alt="C1">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold">Marcus Ward</h3>
+                    <p class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Chief Analyst</p>
+                    <p class="text-sm text-gray-500 max-w-xs mb-3">Former professional footballer turned tactical analyst for major leagues.</p>
+                    <div
+                        class="text-[10px] font-bold uppercase tracking-widest text-brand-dark border-t border-brand-sec pt-2 w-full max-w-[100px]">
+                        127 Articles
+                    </div>
+                </div>
+                <!-- Contributor 2 -->
+                <div class="flex flex-col items-center text-center group cursor-pointer">
+                    <div
+                        class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-accent transition-all p-1">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/marcus-thorne.jpg" class="w-full h-full object-cover rounded-full"
+                            alt="C2">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold">Sophie Williams</h3>
+                    <p class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Transfer Expert</p>
+                    <p class="text-sm text-gray-500 max-w-xs mb-3">Specializing in player valuations and transfer market trends worldwide.</p>
+                    <div
+                        class="text-[10px] font-bold uppercase tracking-widest text-brand-dark border-t border-brand-sec pt-2 w-full max-w-[100px]">
+                        95 Articles
+                    </div>
+                </div>
+                <!-- Contributor 3 -->
+                <div class="flex flex-col items-center text-center group cursor-pointer">
+                    <div
+                        class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-transparent group-hover:border-brand-accent transition-all p-1">
+                        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/sarah-jenkins.jpg" class="w-full h-full object-cover rounded-full"
+                            alt="C3">
+                    </div>
+                    <h3 class="font-serif text-xl font-bold">David Chen</h3>
+                    <p class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Match Correspondent</p>
+                    <p class="text-sm text-gray-500 max-w-xs mb-3">Covering international football and bringing insights from stadiums across Europe.</p>
+                    <div
+                        class="text-[10px] font-bold uppercase tracking-widest text-brand-dark border-t border-brand-sec pt-2 w-full max-w-[100px]">
+                        112 Articles
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIAL HUB -->
+        <section class="bg-brand-dark py-16 mb-24 overflow-hidden">
+        </section>
+
+        
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="bg-brand-dark text-white py-24 relative overflow-hidden">
+            <div class="container mx-auto px-4 relative z-10 text-center">
+                <div class="max-w-2xl mx-auto mb-8">
+                    <h2 class="font-serif text-4xl md:text-5xl mb-6">Join Futbol-direct Today</h2>
+                    <p class="text-white/70 text-lg leading-relaxed mb-8">
+                        Create an account to follow your favorite teams, get live score updates, and stay connected with football news from around the world.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="register.html"
+                            class="px-8 py-3 bg-white text-brand-dark font-bold uppercase tracking-widest hover:bg-gray-200 transition-all text-xs">
+                            Create Account
+                        </a>
+                        <a href="login.html"
+                            class="px-8 py-3 border border-white text-white font-bold uppercase tracking-widest hover:bg-white hover:text-brand-dark transition-all text-xs">
+                            Sign In
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top-btn"
+        class="fixed bottom-8 right-8 z-50 opacity-0 invisible translate-y-4 hover:-translate-y-1 group"
+        aria-label="Scroll to top">
+        <div
+            class="relative flex items-center justify-center w-12 h-12 bg-brand-dark text-white rounded-full shadow-lg overflow-hidden">
+            <!-- Progress Ring Background -->
+            <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none">
+                <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" fill="none"
+                    class="text-white/10" />
+                <circle id="scroll-progress" cx="24" cy="24" r="22" stroke="#FFFFFF" stroke-width="2" fill="none"
+                    stroke-dasharray="138" stroke-dashoffset="138" class="transition-all duration-100 ease-out" />
+            </svg>
+            <i class="ph ph-arrow-up text-xl group-hover:animate-bounce"></i>
+        </div>
+    </button>
+
+    <!-- Cookie Consent Popup -->
+    <div id="cookie-banner"
+        class="fixed bottom-0 right-0 md:bottom-8 md:right-8 z-[100] w-full md:w-[400px] bg-brand-dark text-white p-6 md:rounded-sm shadow-2xl border border-brand-sec/10">
+        <div class="flex justify-between items-start mb-4">
+            <h4 class="font-serif text-xl text-brand-accent">Privacy & Cookies</h4>
+            <button id="close-cookie" class="text-white/50 hover:text-white transition-colors"><i
+                    class="ph ph-x text-lg"></i></button>
+        </div>
+        <p class="text-sm text-gray-300 leading-relaxed mb-6">
+            We use cookies to enhance your experience, analyze our traffic, and serve personalized content. By using our
+            site, you agree to our <a href="cookies.html" class="text-white underline decoration-brand-accent">Cookie
+                Policy</a>.
+        </p>
+        <div class="flex flex-col gap-3">
+            <div class="flex gap-3">
+                <button id="accept-cookies"
+                    class="flex-1 bg-brand-accent text-brand-dark py-3 font-bold uppercase tracking-widest text-xs hover:bg-yellow-500 transition-colors">Accept
+                    All</button>
+                <button id="reject-cookies"
+                    class="flex-1 border border-white/20 text-white py-3 font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-brand-dark transition-colors">Reject</button>
+            </div>
+            <button id="manage-cookies"
+                class="text-center text-xs text-gray-300 hover:text-white transition-colors underline decoration-dotted">Manage
+                Preferences</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-bg border-t border-brand-sec pt-20 pb-10 text-brand-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
+
+                <!-- Col 1: Brand -->
+                <div class="space-y-6">
+                    <h2 class="font-serif text-3xl font-bold text-brand-dark dark:text-white">Futbol-direct</h2>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Your premier destination for live football scores, match statistics, transfers, and in-depth analysis from the world's top leagues and competitions.
+                    </p>
+                    <div class="flex gap-4 text-2xl">
+                        <a href="#" class="hover:text-brand-accent transition-colors"><i
+                                class="ph ph-facebook-logo"></i></a>
+                        <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-x-logo"></i></a>
+                        <a href="#" class="hover:text-brand-accent transition-colors"><i
+                                class="ph ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4
+                        class="font-bold text-xs uppercase tracking-widest mb-6 border-b border-brand-sec pb-2 inline-block">
+                        Football</h4>
+                    <ul class="space-y-3 text-sm text-gray-600 block w-full">
+                        <li><a href="category.html" class="hover:text-brand-accent transition-colors">Live Scores</a></li>
+                        <li><a href="category.html" class="hover:text-brand-accent transition-colors">Standings</a>
+                        </li>
+                        <li><a href="category.html" class="hover:text-brand-accent transition-colors">Design & Art</a>
+                        </li>
+                        <li><a href="category.html" class="hover:text-brand-accent transition-colors">Economics</a></li>
+                        <li><a href="author.html" class="hover:text-brand-accent transition-colors">Author</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Company -->
+                <div>
+                    <h4
+                        class="font-bold text-xs uppercase tracking-widest mb-6 border-b border-brand-sec pb-2 inline-block">
+                        Company</h4>
+                    <ul class="space-y-3 text-sm text-gray-600 block w-full">
+                        <li><a href="about.html" class="hover:text-brand-accent transition-colors">About Us</a></li>
+                        <li><a href="write-for-us.html" class="hover:text-brand-accent transition-colors">Write for
+                                Us</a></li>
+                        <li><a href="subscribe.html" class="hover:text-brand-accent transition-colors">Subscribe</a>
+                        </li>
+                        <li><a href="contact.html" class="hover:text-brand-accent transition-colors">Contact</a></li>
+                        <li><a href="sitemap.html" class="hover:text-brand-accent transition-colors">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Featured Footer Post -->
+                <div>
+                    <h4
+                        class="font-bold text-xs uppercase tracking-widest mb-6 border-b border-brand-sec pb-2 inline-block">
+                        From The Archive</h4>
+                    <div class="group cursor-pointer">
+                        <div class="aspect-video overflow-hidden mb-3">
+                            <img src="https://www.elitefootball.com.au/cdn/shop/articles/IMG_5090.jpg?v=1755232798&width=1100"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                alt="Footer Feature">
+                        </div>
+                        <h5
+                            class="font-serif text-lg font-bold leading-tight mb-1 group-hover:text-brand-accent transition-colors">
+                            <a href="read.html">The Psychology of Football</a>
+                        </h5>
+                        <p class="text-xs text-gray-500">Will a normal human being make it to the pro league?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div
+                class="border-t border-brand-sec pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                    <p>U got some balls.</p>
+                    <span class="hidden md:block text-brand-sec">|</span>
+                    <p class="flex items-center gap-1">Prototype <i class="ph-fill ph-heart text-red-600"></i></p>
+                </div>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="privacy.html" class="hover:text-brand-dark transition-colors">Privacy</a>
+                    <a href="terms.html" class="hover:text-brand-dark transition-colors">Terms</a>
+                    <a href="cookies.html" class="hover:text-brand-dark transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

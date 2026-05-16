@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scores | futboldirect</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'brand-bg': '#FFFFFF',      // White
+                    'brand-dark': '#000000',    // Black
+                    'brand-accent': '#F5F5F5',  // Light Gray
+                    'brand-sec': '#E5E5E5',     // Gray Border
+                    'brand-text': '#333333',    // Dark Gray
+                },
+                fontFamily: {
+                    sans: ['Outfit', 'sans-serif'],
+                    serif: ['Playfair Display', 'serif'],
+                },
+            }
+        }
+    }
+</script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="antialiased font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec transition-all duration-300 shadow-sm">
+        <!-- Topbar -->
+        <div class="bg-brand-dark text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center relative z-20">
+            <div class="flex items-center gap-6">
+                <span id="current-date" class="uppercase tracking-widest font-bold"></span>
+            </div>
+            <div class="flex items-center gap-4 text-lg">
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-facebook-logo"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-x-logo"></i></a>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+            <!-- Hamburger (Mobile) -->
+            <button
+                class="lg:hidden text-brand-dark hover:text-brand-accent"
+                id="hamburger"
+                aria-label="Open mobile menu"
+                title="Open mobile menu"
+                type="button"
+            >
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+
+            <!-- Brand -->
+            <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+                Futbol-direct
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden lg:flex items-center gap-10 text-brand-dark text-xs font-bold uppercase tracking-[0.15em] relative">
+                <a href="livescores.html" class="nav-link hover:text-brand-dark transition-colors border-b-2 border-brand-dark pb-1">Live Scores</a>
+                <a href="news.html" class="nav-link hover:text-brand-dark transition-colors">News</a>
+                <a href="transfer.html" class="nav-link hover:text-brand-dark transition-colors">Transfer</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-5 text-brand-dark">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                    class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors"
+                    aria-label="Toggle dark mode" aria-pressed="false" type="button">
+                    Light
+                </button>
+
+                <a href="login.html"
+                    class="hidden md:inline-block px-5 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+                    Login
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-bg z-[100] transform -translate-x-full transition-transform duration-300 px-6 flex flex-col justify-center overflow-y-auto">
+        <button
+            id="close-mobile"
+            class="absolute top-6 right-6 p-2 text-brand-dark hover:text-brand-accent transition-colors z-[101]"
+            aria-label="Close mobile menu"
+            title="Close mobile menu"
+            type="button"
+        >
+            <i class="ph ph-x text-3xl"></i>
+        </button>
+
+        <div class="mb-8 text-center pt-10">
+            <h2 class="font-serif text-3xl font-bold text-brand-dark dark:text-white">Futbol-direct</h2>
+        </div>
+
+        <nav class="flex flex-col gap-4 text-2xl font-serif text-brand-dark text-center items-center w-full">
+            <a href="livescores.html" class="hover:text-brand-accent transition-all">Live Scores</a>
+            <a href="news.html" class="hover:text-brand-accent transition-all">News</a>
+            <a href="transfer.html" class="hover:text-brand-accent transition-all">Transfer</a>
+        </nav>
+
+        <div class="mt-8 text-center pb-8 space-y-3">
+            <a href="login.html" class="inline-block px-8 py-3 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+                Login
+            </a>
+            <a href="register.html" class="inline-block px-8 py-3 border border-brand-dark text-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+                Register
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-[140px] pb-20">
+        <section class="container mx-auto px-4 md:px-8 mb-20">
+            <div class="mb-12">
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Live Scores Today</h1>
+                <p class="text-gray-600 text-lg">Follow all the latest football matches in real-time</p>
+
+                <!-- Match Search -->
+                <div class="mt-6 flex flex-col md:flex-row gap-3">
+                    <div class="flex-1">
+                        <label class="block text-xs font-bold uppercase tracking-widest text-gray-600 mb-2" for="match-search">
+                            Search match (team, league, matchId, score)
+                        </label>
+                        <input
+                            id="match-search"
+                            type="text"
+                            placeholder="e.g. Arsenal, La Liga, EPL-2026-001, 3-1"
+                            class="w-full px-4 py-3 border-2 border-brand-dark text-brand-dark text-sm outline-none focus:border-gray-600"
+                        />
+                    </div>
+                    <button
+                        id="match-search-btn"
+                        class="md:self-end px-6 py-3 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors"
+                        type="button"
+                    >
+                        Search
+                    </button>
+                </div>
+
+                <div id="match-search-status" class="mt-3 text-sm text-gray-600"></div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex gap-2 mb-8 overflow-x-auto pb-2">
+                <button data-league="" class="px-4 py-2 bg-brand-dark text-white font-bold uppercase tracking-widest text-xs whitespace-nowrap league-tab">All Matches</button>
+                <button data-league="Premier League" class="px-4 py-2 border-2 border-brand-dark text-brand-dark font-bold uppercase tracking-widest text-xs whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors league-tab">Premier League</button>
+                <button data-league="Primera Division" class="px-4 py-2 border-2 border-brand-dark text-brand-dark font-bold uppercase tracking-widest text-xs whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors league-tab">Primera Division</button>
+                <button data-league="Serie A" class="px-4 py-2 border-2 border-brand-dark text-brand-dark font-bold uppercase tracking-widest text-xs whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors league-tab">Serie A</button>
+                <button data-league="Bundesliga" class="px-4 py-2 border-2 border-brand-dark text-brand-dark font-bold uppercase tracking-widest text-xs whitespace-nowrap hover:bg-brand-dark hover:text-white transition-colors league-tab">Bundesliga</button>
+            </div>
+
+            <!-- Match Cards -->
+            <div id="match-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-bg border-t border-brand-sec pt-20 pb-10 text-brand-dark">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 mb-12 text-center md:text-left">
+                <div>
+                    <h2 class="font-serif text-2xl font-bold mb-4">Futbol-direct⚽</h2>
+                    <p class="text-sm text-gray-600">Your premier destination for live football scores and news.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-widest mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="index.html" class="hover:text-brand-dark transition-colors">Home</a></li>
+                        <li><a href="livescores.html" class="hover:text-brand-dark transition-colors">Live Scores</a></li>
+                        <li><a href="news.html" class="hover:text-brand-dark transition-colors">News</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-widest mb-4">Account</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="login.html" class="hover:text-brand-dark transition-colors">Login</a></li>
+                        <li><a href="register.html" class="hover:text-brand-dark transition-colors">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-brand-sec pt-8 text-center text-sm text-gray-600">
+                <p>&copy; 2026 GOALSCORER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+        // Mobile menu toggle
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('-translate-x-full');
+        });
+
+        document.getElementById('close-mobile').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('-translate-x-full');
+        });
+
+        // ---- Live Scores: search + render ----
+        const API_BASE = "http://localhost:3100";
+        const API_KEY = "84578e2521374c3d9f13a400f7ef0caf";
+
+        const statusEl = document.getElementById("match-search-status");
+        const gridEl = document.getElementById("match-cards-grid");
+        const searchInputEl = document.getElementById("match-search");
+        const searchBtnEl = document.getElementById("match-search-btn");
+        const leagueTabEls = Array.from(document.querySelectorAll(".league-tab"));
+
+        function setStatus(message) {
+            if (!statusEl) return;
+            statusEl.textContent = message;
+        }
+
+        function escapeText(value) {
+            return String(value ?? "");
+        }
+
+        function renderMatchCard(match) {
+            const stageLabel = match.stage === "Live" ? "Live" : "Final";
+            const score = `${match.homeScore}-${match.awayScore}`;
+
+            return `
+                <div class="bg-white border-2 border-brand-dark p-6 hover:shadow-lg transition-shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-600">${escapeText(match.league)}</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-600">${escapeText(stageLabel)}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 items-center text-center">
+                        <div class="text-right">
+                            <h3 class="font-serif text-xl font-bold text-brand-dark mb-2">${escapeText(match.homeTeam)}</h3>
+                            <p class="text-gray-600 text-sm">Home</p>
+                        </div>
+
+                        <div class="px-4 py-2 border-2 border-brand-dark">
+                            <p class="font-serif text-3xl font-bold text-brand-dark">${escapeText(score)}</p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-brand-sec mt-4 pt-4 text-center">
+                        <h3 class="font-serif text-xl font-bold text-brand-dark">${escapeText(match.awayTeam)}</h3>
+                        <p class="text-gray-600 text-sm">Away</p>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <button
+                          type="button"
+                          class="view-details text-xs font-bold uppercase tracking-widest border-b-2 border-brand-dark pb-1 hover:text-gray-600"
+                          data-match-id="${escapeText(match.matchId)}"
+                        >
+                          View Details
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMatches(matches) {
+            if (!gridEl) return;
+
+            if (!matches || matches.length === 0) {
+                gridEl.innerHTML = "";
+                setStatus("No matches found. Try searching by team, league, matchId, or score (e.g. 3-1).");
+                return;
+            }
+
+            setStatus("");
+            gridEl.innerHTML = matches.map(renderMatchCard).join("");
+
+            // Bind click handlers for view details
+            const viewBtns = Array.from(gridEl.querySelectorAll(".view-details"));
+            viewBtns.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const matchId = btn.getAttribute("data-match-id") ?? "";
+                    const match = (matches || []).find((m) => m.matchId === matchId);
+                    if (match) openDetailsModal(match);
+                });
+            });
+        }
+
+        // ----- Details Modal -----
+        const modal = document.getElementById("match-details-modal");
+        const modalCloseBtn = document.getElementById("match-details-close");
+        const modalBody = document.getElementById("match-details-body");
+
+        function openDetailsModal(match) {
+            if (!modal || !modalBody) return;
+
+            const stageLabel = match.stage ?? "Unknown";
+            const score = `${match.homeScore}-${match.awayScore}`;
+
+            modalBody.innerHTML = `
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-dark">${escapeText(match.league)}</h3>
+                    <p class="text-sm text-gray-600 mt-1">Stage: ${escapeText(stageLabel)}</p>
+                  </div>
+                  <div class="px-4 py-2 border-2 border-brand-dark">
+                    <p class="font-serif text-3xl font-bold text-brand-dark">${escapeText(score)}</p>
+                    <p class="text-xs text-gray-600 mt-1">Match ID: ${escapeText(match.matchId)}</p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border-2 border-brand-sec p-4">
+                      <p class="text-xs font-bold uppercase tracking-widest text-gray-600">Home</p>
+                      <h4 class="font-serif text-xl font-bold text-brand-dark mt-2">${escapeText(match.homeTeam)}</h4>
+                      <div class="mt-3 flex items-center justify-between gap-3">
+                        <span class="text-sm text-gray-600">Goals</span>
+                        <span class="font-serif text-xl font-bold text-brand-dark">${escapeText(match.homeScore)}</span>
+                      </div>
+                    </div>
+
+                    <div class="border-2 border-brand-sec p-4">
+                      <p class="text-xs font-bold uppercase tracking-widest text-gray-600">Away</p>
+                      <h4 class="font-serif text-xl font-bold text-brand-dark mt-2">${escapeText(match.awayTeam)}</h4>
+                      <div class="mt-3 flex items-center justify-between gap-3">
+                        <span class="text-sm text-gray-600">Goals</span>
+                        <span class="font-serif text-xl font-bold text-brand-dark">${escapeText(match.awayScore)}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="border-2 border-brand-sec p-4">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                      <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-gray-600">Match Result</p>
+                        <h5 class="font-serif text-xl font-bold text-brand-dark mt-2">${escapeText(match.homeScore)} - ${escapeText(match.awayScore)}</h5>
+                      </div>
+
+                      <div class="text-sm text-gray-600">
+                        <div>Stage: <span class="font-bold">${escapeText(stageLabel)}</span></div>
+                        <div class="mt-1">League: <span class="font-bold">${escapeText(match.league)}</span></div>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div class="bg-white border border-brand-sec p-3">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-600">Total Goals</p>
+                        <p class="font-serif text-xl font-bold text-brand-dark mt-1">${escapeText(Number(match.homeScore) + Number(match.awayScore))}</p>
+                      </div>
+                      <div class="bg-white border border-brand-sec p-3">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-600">Home Goals</p>
+                        <p class="font-serif text-xl font-bold text-brand-dark mt-1">${escapeText(match.homeScore)}</p>
+                      </div>
+                      <div class="bg-white border border-brand-sec p-3">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-600">Away Goals</p>
+                        <p class="font-serif text-xl font-bold text-brand-dark mt-1">${escapeText(match.awayScore)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="bg-gray-50 border border-brand-sec p-4">
+                    <p class="text-xs font-bold uppercase tracking-widest text-gray-600">More detailed stats</p>
+                    <p class="text-sm text-gray-600 mt-2">
+                      Shots / possession / lineup events aren’t available from the current backend fields.
+                      If you want, I can add a backend endpoint to fetch more stats and render them here.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function closeDetailsModal() {
+            if (!modal) return;
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeDetailsModal);
+        if (modal) {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) closeDetailsModal();
+            });
+        }
+
+        async function fetchMatches({ q, league, limit = 50 } = {}) {
+            try {
+                if (!gridEl) return;
+
+                const url = new URL("/api/live-scores", API_BASE);
+                if (typeof q === "string" && q.trim()) url.searchParams.set("q", q.trim());
+                if (typeof league === "string" && league.trim()) url.searchParams.set("league", league.trim());
+                url.searchParams.set("limit", String(limit));
+
+                setStatus(`Loading matches (${limit} max)...`);
+                const resp = await fetch(url.toString(), {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${API_KEY}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                if (!resp.ok) throw new Error(`Request failed: ${resp.status}`);
+
+                const json = await resp.json();
+                renderMatches(json?.data ?? []);
+            } catch (err) {
+                console.error(err);
+                setStatus("Could not load live scores. Make sure the API server is running on port 3001.");
+                if (gridEl) gridEl.innerHTML = "";
+            }
+        }
+
+        let currentLeague = "";
+
+        function getSearchQuery() {
+            if (!searchInputEl) return "";
+            return searchInputEl.value ?? "";
+        }
+
+        function applyLeagueTabStyles() {
+            leagueTabEls.forEach((btn) => {
+                const isActive = (btn.getAttribute("data-league") ?? "") === (currentLeague ?? "");
+                if (isActive) {
+                    btn.classList.add("bg-brand-dark", "text-white");
+                    btn.classList.remove("border-brand-dark", "text-brand-dark");
+                    btn.classList.add("hover:bg-brand-dark", "hover:text-white");
+                } else {
+                    btn.classList.remove("bg-brand-dark", "text-white");
+                    btn.classList.add("border-2", "border-brand-dark", "text-brand-dark");
+                    btn.classList.remove("hover:bg-brand-dark", "hover:text-white");
+                }
+            });
+        }
+
+        async function runSearch() {
+            const q = getSearchQuery();
+            await fetchMatches({ q, league: currentLeague });
+        }
+
+        if (searchBtnEl && searchInputEl) {
+            searchBtnEl.addEventListener("click", () => runSearch());
+            searchInputEl.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") runSearch();
+            });
+        }
+
+        leagueTabEls.forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                currentLeague = btn.getAttribute("data-league") ?? "";
+                applyLeagueTabStyles();
+                await fetchMatches({ q: getSearchQuery(), league: currentLeague });
+            });
+        });
+
+        // Initial load: show all matches
+        if (gridEl) {
+            currentLeague = "";
+            applyLeagueTabStyles();
+            fetchMatches({ q: "", league: "" });
+        }
+    </script>
+
+    <!-- Match Details Modal -->
+    <div id="match-details-modal" class="hidden fixed inset-0 z-[120] bg-black/50 items-center justify-center p-4">
+      <div class="bg-white border-2 border-brand-dark w-full max-w-3xl p-6 relative shadow-lg">
+        <button
+          id="match-details-close"
+          class="absolute top-4 right-4 p-2 border-2 border-brand-sec hover:border-brand-dark hover:text-brand-dark transition-colors"
+          type="button"
+          aria-label="Close details"
+          title="Close details"
+        >
+          <i class="ph ph-x text-2xl"></i>
+        </button>
+        <div id="match-details-body"></div>
+      </div>
+    </div>
+
+    <!-- Dependencies for script.js -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

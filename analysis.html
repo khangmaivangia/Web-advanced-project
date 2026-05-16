@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis | futboldirect</title>
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico" type="image/x-icon" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-bg': '#FFFFFF',
+            'brand-dark': '#000000',
+            'brand-accent': '#D4AF37',
+            'brand-sec': '#E5E5E5',
+            'brand-text': '#333333',
+          },
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="antialiased font-sans">
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec transition-all duration-300 shadow-sm">
+    <div class="bg-brand-dark text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center relative z-20">
+      <div class="flex items-center gap-6">
+        <span id="current-date" class="uppercase tracking-widest font-bold"></span>
+      </div>
+      <div class="flex items-center gap-4 text-lg">
+        <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-facebook-logo"></i></a>
+        <a href="#" class="hover:text-brand-accent transition-colors"><i class="ph ph-x-logo"></i></a>
+      </div>
+    </div>
+
+    <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+      <button class="lg:hidden text-brand-dark hover:text-brand-accent" id="hamburger" aria-label="Open mobile menu" type="button">
+        <i class="ph ph-list text-2xl"></i>
+      </button>
+
+      <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">
+        Futbol-direct
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-10 text-brand-dark text-xs font-bold uppercase tracking-[0.15em] relative">
+        <a href="livescores.html" class="nav-link hover:text-brand-accent transition-colors">Live Scores</a>
+        <a href="news.html" class="nav-link hover:text-brand-accent transition-colors">News</a>
+        <a href="transfer.html" class="nav-link hover:text-brand-accent transition-colors">Transfer</a>
+      </nav>
+
+      <div class="flex items-center gap-5 text-brand-dark">
+        <button id="theme-toggle"
+          class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors"
+          aria-label="Toggle dark mode" aria-pressed="false" type="button">
+          Light
+        </button>
+
+        <a href="login.html"
+          class="hidden md:inline-block px-5 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+          Login
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu"
+    class="fixed inset-0 bg-brand-bg z-[100] transform -translate-x-full transition-transform duration-300 px-6 flex flex-col justify-center overflow-y-auto">
+    <button id="close-mobile" class="absolute top-6 right-6 p-2 text-brand-dark hover:text-brand-accent transition-colors z-[101]" aria-label="Close mobile menu" type="button">
+      <i class="ph ph-x text-3xl"></i>
+    </button>
+
+    <div class="mb-8 text-center pt-10">
+      <h2 class="font-serif text-3xl font-bold text-brand-dark dark:text-white">Futbol-direct</h2>
+    </div>
+
+    <nav class="flex flex-col gap-4 text-2xl font-serif text-brand-dark text-center items-center w-full">
+      <a href="livescores.html" class="hover:text-brand-accent transition-all">Live Scores</a>
+      <a href="news.html" class="hover:text-brand-accent transition-all">News</a>
+      <a href="transfer.html" class="hover:text-brand-accent transition-all">Transfer</a>
+      <a href="teaminfo.html" class="hover:text-brand-accent transition-all">Team Info</a>
+      <a href="analysis.html" class="hover:text-brand-accent transition-all font-bold">Analysis</a>
+    </nav>
+
+    <div class="mt-8 text-center pb-8 space-y-3">
+      <a href="login.html" class="inline-block px-8 py-3 bg-brand-dark text-white text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+        Login
+      </a>
+      <a href="register.html" class="inline-block px-8 py-3 border border-brand-dark text-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">
+        Register
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="pt-[140px] pb-20">
+    <section class="container mx-auto px-4 md:px-8 mb-10">
+      <div class="mb-8">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Analysis</h1>
+        <p class="text-gray-600 text-lg">Work in progress. When the API is wired, this page will show team insights.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-8 bg-white border-2 border-brand-dark p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="ph ph-microphone text-3xl text-brand-accent"></i>
+            <h2 class="font-serif text-2xl font-bold text-brand-dark">Selected Team</h2>
+          </div>
+
+          <div class="border-2 border-brand-sec p-5">
+            <div class="text-xs font-bold uppercase tracking-widest text-gray-500">Query</div>
+            <div class="font-serif text-xl font-bold text-brand-dark" id="team-name">—</div>
+            <div class="text-sm text-gray-600 mt-2">
+              Add your real analysis output here (tactics, match previews, injuries, form, etc).
+            </div>
+
+            <div class="mt-6 inline-flex items-center gap-2 px-3 py-2 border border-brand-sec bg-brand-bg text-xs font-bold uppercase tracking-widest">
+              <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+              Work in progress
+            </div>
+          </div>
+        </div>
+
+        <aside class="lg:col-span-4 space-y-4">
+          <div class="bg-white border-2 border-brand-sec p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Using API Keys</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Keep API keys on your server (backend). The front-end should call only your backend endpoints.
+            </p>
+          </div>
+
+          <div class="bg-white border-2 border-brand-sec p-6">
+            <h3 class="font-serif text-xl font-bold text-brand-dark mb-3">Jump to Team Info</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">
+              Prefer a team browsing page? Use Team Info.
+            </p>
+            <a href="teaminfo.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest border-b-2 border-brand-dark pb-1 hover:text-gray-600 transition-colors">
+              Open Team Info <i class="ph ph-arrow-right"></i>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-bg border-t border-brand-sec pt-20 pb-10 text-brand-dark">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="border-t border-brand-sec pt-8 text-center text-sm text-gray-600">
+        <p>&copy; 2026 Futbol-direct. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    document.getElementById('current-date').textContent =
+      new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+    $('#hamburger').click(function () {
+      $('#mobile-menu').removeClass('-translate-x-full');
+      $('body').addClass('overflow-hidden');
+    });
+
+    $('#close-mobile').click(function () {
+      $('#mobile-menu').addClass('-translate-x-full');
+      $('body').removeClass('overflow-hidden');
+    });
+
+    (function initTeamFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      const team = params.get('team');
+      const el = document.getElementById('team-name');
+
+      if (!el) return;
+
+      if (!team) {
+        el.textContent = 'All teams (default)';
+        return;
+      }
+
+      el.textContent = team.replaceAll('-', ' ')
+        .replace(/\b\w/g, (m) => m.toUpperCase());
+    })();
+  </script>
+</body>
+
+</html>

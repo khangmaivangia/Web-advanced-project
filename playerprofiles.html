@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Profiles | futboldirect</title>
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Velocity%20Blog%20Website%20Template/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { 'brand-bg': '#FFFFFF', 'brand-dark': '#000000', 'brand-accent': '#D4AF37', 'brand-sec': '#E5E5E5', 'brand-text': '#333333' }, fontFamily: { sans: ['Outfit','sans-serif'], serif: ['Playfair Display','serif'] } } } }
+  </script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="antialiased font-sans">
+  <header class="fixed top-0 w-full z-50 bg-brand-bg border-b border-brand-sec transition-all duration-300 shadow-sm">
+    <div class="bg-brand-dark text-white text-xs py-2 px-4 md:px-8 flex justify-between items-center relative z-20">
+      <div class="flex items-center gap-6"><span id="current-date" class="uppercase tracking-widest font-bold"></span></div>
+      <div class="flex items-center gap-4 text-lg">
+        <a href="#" class="hover:text-brand-accent transition-colors" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+        <a href="#" class="hover:text-brand-accent transition-colors" aria-label="X"><i class="ph ph-x-logo"></i></a>
+      </div>
+    </div>
+
+    <div class="px-4 md:px-8 py-5 flex justify-between items-center relative z-20 bg-brand-bg">
+      <a href="index.html" class="font-serif text-4xl font-black tracking-tighter text-brand-dark">Futbol-direct</a>
+      <nav class="hidden lg:flex items-center gap-10 text-brand-dark text-xs font-bold uppercase tracking-[0.15em]">
+        <a href="livescores.html" class="nav-link hover:text-brand-accent transition-colors">Live Scores</a>
+        <a href="news.html" class="nav-link hover:text-brand-accent transition-colors">News</a>
+        <a href="transfer.html" class="nav-link hover:text-brand-accent transition-colors">Transfer</a>
+      </nav>
+
+      <div class="flex items-center gap-5 text-brand-dark">
+        <button id="theme-toggle"
+          class="px-3 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors"
+          aria-label="Toggle dark mode" aria-pressed="false" type="button">Light</button>
+        <a href="login.html" class="hidden md:inline-block px-5 py-2 border border-brand-dark text-xs font-bold uppercase tracking-widest hover:bg-brand-dark hover:text-white transition-colors">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-[140px] pb-20">
+    <section class="container mx-auto px-4 md:px-8">
+      <div class="mb-8">
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Player Profiles</h1>
+        <p class="text-gray-600 text-lg">Work in progress — player cards and stats will live here.</p>
+      </div>
+
+      <div class="bg-white border-2 border-brand-sec p-6">
+        <div class="flex items-center gap-3">
+          <i class="ph ph-users text-3xl text-brand-accent"></i>
+          <h2 class="font-serif text-2xl font-bold text-brand-dark">Players (Placeholder)</h2>
+        </div>
+
+        <div class="mt-6 text-sm text-gray-600">
+          Wire the real player API through your backend (keep secret keys server-side).
+        </div>
+
+        <div class="mt-6 inline-flex items-center gap-2 px-3 py-2 border border-brand-sec bg-brand-bg text-xs font-bold uppercase tracking-widest">
+          <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+          Work in progress
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-bg border-t border-brand-sec pt-20 pb-10 text-brand-dark">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="border-t border-brand-sec pt-8 text-center text-sm text-gray-600">
+        <p>&copy; 2026 Futbol-direct. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
